@@ -9,8 +9,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/colorBackgroundText"
         android:text="Hello World!"
-        android:background="#ff00FF"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
