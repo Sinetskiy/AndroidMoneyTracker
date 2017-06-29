@@ -5,4 +5,15 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorText">#FFFFFF</color>
     <color name="colorBackgroundText">#FFFFFF</color>
+    <color name="golden_yellow">#fcc31e</color>
+    <color name="tealish">#1ca498</color>
+    <color name="dusty_orange">#e67e22</color>
+    <color name="dark_sky_blue">#3498db</color>
+    <color name="deep_lavender">#9b59b6</color>
+    <color name="cool_grey">#95a5a6</color>
+    <color name="pale_teal">#7dc9b0</color>
+    <color name="light_blue_grey">#dbece6</color>
+    <color name="black_19">#30000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black__27">#45000000</color>
 </resources>
