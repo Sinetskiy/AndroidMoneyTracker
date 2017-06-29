@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ItemLinerLayout">
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/TextItem.Name"
+        tools:text="Сковородка с антипригарным покрытием" />
+
+    <TextView
+        android:id="@+id/price"
+        style="@style/TextItem.Price"
+        tools:text="35 \u20bd" />
+</LinearLayout>

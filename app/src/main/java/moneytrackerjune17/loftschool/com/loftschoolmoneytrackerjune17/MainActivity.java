@@ -1,54 +1,70 @@
 package moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        final TextView add = (TextView) findViewById(R.id.add);
-        final EditText name = (EditText) findViewById(R.id.name);
-        final EditText price = (EditText) findViewById(R.id.price);
-        final TextWatcher textWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                add.setEnabled(!TextUtils.isEmpty(name.getText())&&!TextUtils.isEmpty(price.getText()));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
-
-        name.addTextChangedListener(textWatcher);
-        price.addTextChangedListener(textWatcher);
-
+        setContentView(R.layout.items);
+        final RecyclerView items = (RecyclerView) findViewById(R.id.items);
+        items.setAdapter(new ItemsAdapter());
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private class ItemsAdapter extends RecyclerView.Adapter<ItemViewHolder> {
+        final List<Item> items = new ArrayList<Item>();
+
+        ItemsAdapter() {
+            items.add(new Item("Молоко", 35));
+            items.add(new Item("Зубная щетка", 1500));
+            items.add(new Item("Сковородка с антипригарным покрытием", 55));
+            items.add(new Item("Молоко", 35));
+            items.add(new Item("Зубная щетка", 1500));
+            items.add(new Item("Сковородка с антипригарным покрытием", 55));
+            items.add(new Item("Молоко", 35));
+            items.add(new Item("Зубная щетка", 1500));
+            items.add(new Item("Сковородка с антипригарным покрытием", 55));
+            items.add(new Item("Молоко", 35));
+            items.add(new Item("Зубная щетка", 1500));
+            items.add(new Item("Сковородка с антипригарным покрытием", 55));
+        }
+
+        @Override
+        public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new ItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false));
+        }
+
+        @Override
+        public void onBindViewHolder(ItemViewHolder holder, int position) {
+            final Item item = items.get(position);
+            holder.name.setText(item.name);
+            holder.price.setText(String.valueOf(item.price) + "\u20bd");
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
+        }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
+    private class ItemViewHolder extends RecyclerView.ViewHolder {
+        private final TextView name, price;
+
+        ItemViewHolder(View itemView) {
+            super(itemView);
+            name = (TextView) itemView.findViewById(R.id.name);
+            price = (TextView) itemView.findViewById(R.id.price);
+        }
     }
 }
