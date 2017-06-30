@@ -32,9 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+
+            if(position == 2)
+            {
+                return new BalanceFragment();
+            }
+
             final ItemsFragment fragment = new ItemsFragment();
             Bundle args = new Bundle();
-            args.putString(ItemsFragment.ARG_TYPE, Item.TYPE_EXPENSE);
+
+            args.putString(ItemsFragment.ARG_TYPE, (position == 1? Item.TYPE_INCOME:  Item.TYPE_EXPENSE));
+
             fragment.setArguments(args);
             return fragment;
         }
