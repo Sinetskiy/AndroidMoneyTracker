@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_pattern"
+    tools:context="moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingStart="23dp"
+        android:paddingEnd="16dp"
+        android:layout_marginTop="-5dp"
+        android:paddingBottom="10dp">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:hint="@string/name_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/textSize"/>
+
+        <EditText
+            android:id="@+id/price"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:hint="@string/price_hint"
+            android:inputType="number"
+            android:textSize="@dimen/textSize"
+            android:textAlignment="textEnd"/>
+
+        <TextView
+            android:id="@+id/ruble"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ruble_sign"
+            android:textSize="@dimen/textSize2" />
+
+        <TextView
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:paddingEnd="@dimen/padding_l"
+            android:paddingStart="@dimen/padding_l"
+            android:text="+"
+            android:textSize="40sp"
+            android:layout_marginTop="5dp" />
+
+    </LinearLayout>
+
+</FrameLayout>
