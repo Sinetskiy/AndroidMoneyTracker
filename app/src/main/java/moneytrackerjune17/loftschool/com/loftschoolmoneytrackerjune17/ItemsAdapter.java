@@ -9,26 +9,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17.Item.TYPE_EXPENSE;
+
 /**
  * Created by andreysinetskiy on 29.06.17.
  */
 class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
     final List<Item> items = new ArrayList<>();
 
+    /*
     ItemsAdapter() {
-        items.add(new Item("Молоко", 35));
-        items.add(new Item("Зубная щетка", 1500));
-        items.add(new Item("Сковородка с антипригарным покрытием", 55));
-        items.add(new Item("Молоко", 35));
-        items.add(new Item("Зубная щетка", 1500));
-        items.add(new Item("Сковородка с антипригарным покрытием", 55));
-        items.add(new Item("Молоко", 35));
-        items.add(new Item("Зубная щетка", 1500));
-        items.add(new Item("Сковородка с антипригарным покрытием", 55));
-        items.add(new Item("Молоко", 35));
-        items.add(new Item("Зубная щетка", 1500));
-        items.add(new Item("Сковородка с антипригарным покрытием", 55));
+        items.add(new Item("Молоко", 35, TYPE_EXPENSE));
+        items.add(new Item("Зубная щетка", 1500, TYPE_EXPENSE));
+        items.add(new Item("Сковородка с антипригарным покрытием", 55, TYPE_EXPENSE));
     }
+    */
 
 
     @Override
@@ -48,6 +43,15 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         return items.size();
     }
 
+    public void clear() {
+        items.clear();
+    }
+
+    public void addAll(List<Item> items) {
+        this.items.addAll(items);
+        notifyDataSetChanged();
+    }
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private final TextView name, price;
 
@@ -57,6 +61,7 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
             price = (TextView) itemView.findViewById(R.id.price);
         }
     }
+
 }
 
 
