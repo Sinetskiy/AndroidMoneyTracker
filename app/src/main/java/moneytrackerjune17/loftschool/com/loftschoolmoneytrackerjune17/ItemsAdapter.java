@@ -52,6 +52,11 @@ class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ItemViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void updateId(Item item, int id) {
+        this.items.add(id, item);
+        notifyDataSetChanged();
+    }
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
         private final TextView name, price;
 

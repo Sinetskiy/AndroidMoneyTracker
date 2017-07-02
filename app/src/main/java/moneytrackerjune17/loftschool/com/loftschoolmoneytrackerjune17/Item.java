@@ -8,10 +8,8 @@ public class Item {
     public static final String TYPE_EXPENSE = "expense";
     public static final String TYPE_INCOME = "income";
 
-    int id;
-    String name;
-    int price;
-    String type;
+    int id = -1, price;
+    String name, type;
 
 
     public Item(String name, int price, String type) {

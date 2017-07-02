@@ -6,7 +6,7 @@ import android.text.TextUtils;
  * Created by andreysinetskiy on 01.07.17.
  */
 
-class Result {
+public class Result {
     String status;
 
     public boolean isSuccess() {

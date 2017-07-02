@@ -22,9 +22,9 @@ public interface LSApi {
 //    @GET("balance")
 //    Call<BalanceResult> balance();
 
-//    @POST("items/add")
-//    Call<AddResult> add(@Query("name") String name,@Query("price") int pri,@Query("type") String type);
+    @POST("items/add")
+    Call<AddResult> add(@Query("name") String name, @Query("price") int pri, @Query("type") String type);
 
-//    @POST("items/remove")
-//    Call<Result> remove(@Query("id") int id);
+    @POST("items/remove")
+    Call<Result> remove(@Query("id") int id);
 }

@@ -12,6 +12,8 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17.Item.TYPE_EXPENSE;
+
 /**
  * Created by andreysinetskiy on 01.07.17.
  */
@@ -34,7 +36,7 @@ public class LSApp extends Application {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://loftschoolandroid.getsandbox.com/items/")
+                .baseUrl("http://android2017leason5.getsandbox.com/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build();
