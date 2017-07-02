@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         final ViewPager pages = (ViewPager) findViewById(R.id.pages);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        setSupportActionBar(toolbar);
         pages.setAdapter(new MainPagerAdapter());
         tabs.setupWithViewPager(pages);
 

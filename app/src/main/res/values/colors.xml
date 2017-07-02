@@ -13,4 +13,10 @@
     <color name="black__27">#45000000</color>
     <color name="litle_gray">#a6ffffff</color>
     <color name="tab_indicator">#fbff88</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorLightYellow">#FCC418</color>
+    <color name="colorDarkYellow">#E6AE1E</color>
 </resources>

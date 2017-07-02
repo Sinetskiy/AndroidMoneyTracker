@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_pattern"
-    tools:context="moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17.MainActivity">
+    android:background="@drawable/bg_pattern">
 
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:id="@+id/toolbar"/>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
+            style="@style/Tabs"
             app:tabIndicatorColor="@color/tab_indicator"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/litle_gray"
-            style="@style/Tabs" />
+            app:tabTextColor="@color/litle_gray" />
+    </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pages"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pages"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    </LinearLayout>
-
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>
