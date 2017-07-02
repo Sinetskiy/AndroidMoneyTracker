@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/pale_teal</item>
         <item name="colorPrimaryDark">@color/tealish</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="ItemLinerLayout">
@@ -54,12 +55,75 @@
 
     <style name="AppTheme.Toolbar" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="actionModeBackground">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/pale_teal</item>
+        <item name="colorPrimaryDark">@color/tealish</item>
+        <item name="colorAccent">@color/tealish</item>
         <item name="windowActionModeOverlay">true</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
+    <style name="FAB">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_gravity">bottom|end</item>
+        <item name="android:layout_margin">20dp</item>
+    </style>
+
+    <style name="lableFAB">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation">@dimen/small_elevation</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">@dimen/fab_lable_text_size</item>
+    </style>
+
+    <style name="new_item_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">-5dp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingStart">23dp</item>
+    </style>
+
+    <style name="new_item_name">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:inputType">text</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/textSize</item>
+    </style>
+
+    <style name="new_item_price">
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textAlignment">textEnd</item>
+        <item name="android:textSize">@dimen/textSize</item>
+    </style>
+
+    <style name="new_item_price_sign">
+        <item name="android:paddingStart">3dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/cool_grey</item>
+        <item name="android:textSize">@dimen/textSize2</item>
+    </style>
+
+    <style name="new_item_add_button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:enabled">false</item>
+        <item name="android:paddingEnd">@dimen/padding_s</item>
+        <item name="android:paddingStart">@dimen/padding_l</item>
+        <item name="android:textColor">@color/cool_grey</item>
+        <item name="android:textSize">40sp</item>
     </style>
 
 </resources>

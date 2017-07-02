@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="padding_l">16dp</dimen>
+    <dimen name="padding_s">6dp</dimen>
     <dimen name="textSize">20sp</dimen>
     <dimen name="textSize2">18sp</dimen>
     <dimen name="margin_small">5dp</dimen>
+    <dimen name="small_elevation">6dp</dimen>
+    <dimen name="fab_lable_text_size">30dp</dimen>
+    <dimen name="large_elevation">40dp</dimen>
 </resources>
