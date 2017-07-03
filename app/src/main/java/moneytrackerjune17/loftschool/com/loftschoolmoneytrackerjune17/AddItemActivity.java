@@ -21,11 +21,13 @@ public class AddItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
         type = getIntent().getStringExtra(EXTRA_TYPE);
 
         final TextView add = (TextView) findViewById(R.id.add);
         final EditText name = (EditText) findViewById(R.id.name);
         final EditText price = (EditText) findViewById(R.id.price);
+
         final TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

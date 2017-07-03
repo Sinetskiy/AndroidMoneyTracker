@@ -8,4 +8,6 @@
     <dimen name="small_elevation">6dp</dimen>
     <dimen name="fab_lable_text_size">30dp</dimen>
     <dimen name="large_elevation">40dp</dimen>
+    <dimen name="elevation">40dp</dimen>
+    <dimen name="margin_medium">20dp</dimen>
 </resources>
