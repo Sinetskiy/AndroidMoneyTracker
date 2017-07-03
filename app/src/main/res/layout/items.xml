@@ -18,13 +18,20 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/add"
-            style="@style/FAB" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="20dp" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/small_elevation"
             android:text="@string/plus"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fab_lable_text_size"
             app:layout_anchor="@+id/add"
-            app:layout_anchorGravity="center"
-            style="@style/lableFAB" />
+            app:layout_anchorGravity="center" />
 
     </android.support.design.widget.CoordinatorLayout>
 
