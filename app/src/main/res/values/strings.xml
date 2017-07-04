@@ -9,6 +9,8 @@
     <string name="incomes">доходы</string>
     <string name="balance">Баланс</string>
     <string name="error">Произошла ошибка</string>
+    <string name="new_item">Новая запись</string>
+    <string name="plus">+</string>
 
     <array name="main_pager_titles">
         <item>@string/expenses</item>

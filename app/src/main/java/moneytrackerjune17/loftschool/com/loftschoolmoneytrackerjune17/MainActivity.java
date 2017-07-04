@@ -6,19 +6,32 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TabLayout tabs;
+    private ViewPager pages;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
-        final TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        final ViewPager pages = (ViewPager) findViewById(R.id.pages);
+        tabs = (TabLayout) findViewById(R.id.tabs);
+        pages = (ViewPager) findViewById(R.id.pages);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        initUi();
+    }
+
+    private void initUi() {
+        if (pages.getAdapter() != null)
+            return;
 
         pages.setAdapter(new MainPagerAdapter());
         tabs.setupWithViewPager(pages);
-
     }
 
 

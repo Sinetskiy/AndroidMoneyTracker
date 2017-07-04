@@ -1,11 +1,13 @@
 package moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,9 @@ import java.util.List;
 import moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17.api.AddResult;
 import moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17.api.Result;
 import moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17.api.LSApi;
+
+import static android.app.Activity.RESULT_OK;
+import static moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17.AddItemActivity.RC_ADD_ITEM;
 
 /**
  * Created by andreysinetskiy on 29.06.17.
@@ -33,6 +38,8 @@ public class ItemsFragment extends Fragment {
 
     private String type;
     private LSApi api;
+    private View add;
+    private SwipeRefreshLayout refresh;
 
     @Nullable
     @Override
@@ -46,6 +53,27 @@ public class ItemsFragment extends Fragment {
 
         final RecyclerView items = (RecyclerView) view.findViewById(R.id.items);
         items.setAdapter(adapter);
+
+        refresh = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+
+                    @Override
+                    public void onRefresh() {
+                        loadItems();
+                    }
+                });
+        add = view.findViewById(R.id.add);
+        add.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                final Intent intent = new Intent(getActivity(), AddItemActivity.class);
+                intent.putExtra(AddItemActivity.EXTRA_TYPE, type);
+                startActivityForResult(intent, AddItemActivity.RC_ADD_ITEM);
+            }
+        });
 
         type = getArguments().getString(ARG_TYPE);
         api = ((LSApp) getActivity().getApplication()).api();
@@ -150,6 +178,17 @@ public class ItemsFragment extends Fragment {
 
             }
         }).startLoading();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RC_ADD_ITEM && resultCode == RESULT_OK) {
+
+            addItem((Item) data.getSerializableExtra(AddItemActivity.RESULT_ITEM));
+            Item item = (Item) data.getSerializableExtra(AddItemActivity.RESULT_ITEM);
+            Toast toast = Toast.makeText(getContext(), item.name + " " + item.price, Toast.LENGTH_LONG);
+            toast.show();
+        }
     }
 
 }
