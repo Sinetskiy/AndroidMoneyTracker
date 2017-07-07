@@ -15,6 +15,9 @@ import retrofit2.http.Query;
 
 public interface LSApi {
 
+    @GET("auth")
+    Call<AuthResult> auth(@Query("social_user_id") String socialUserId);
+
     @Headers("Content-Type: application/json")
     @GET("items")
     Call<List<Item>> items(@Query("type") String type);
