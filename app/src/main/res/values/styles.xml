@@ -37,14 +37,14 @@
     <style name="TextItem.Name" parent="TextItem">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">@color/golden_yellow</item>
+        <!--<item name="android:background">@color/golden_yellow</item>-->
         <item name="android:padding">14dp</item>
         <item name="android:textStyle">normal</item>
     </style>
 
     <style name="TextItem.Price" parent="TextItem">
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@color/dusty_orange</item>
+        <!--<item name="android:background">@color/dusty_orange</item>-->
         <item name="android:gravity">center_vertical</item>
         <item name="android:padding">10dp</item>
         <item name="android:textAlignment">gravity</item>
@@ -55,7 +55,6 @@
     <style name="Tabs">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/pale_teal</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>

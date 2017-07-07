@@ -8,12 +8,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
-import android.support.v4.view.GestureDetectorCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -47,13 +48,15 @@ public class ItemsFragment extends Fragment {
 
     private String type;
     private LSApi api;
-    private View add;
+    private View addButton;
     private SwipeRefreshLayout refresh;
     private ActionMode actionMode;
+
     private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
 
         @Override
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            addButton.setVisibility(View.INVISIBLE);
             mode.getMenuInflater().inflate(R.menu.items, menu);
             return true;
         }
@@ -73,8 +76,9 @@ public class ItemsFragment extends Fragment {
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int id) {
-                                    for (Integer selecedItemId : adapter.getSelectedItems())
-                                        removeItem(new Item("",222,""));
+                                    for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i--)
+
+                                        removeItem(adapter.remove(adapter.getSelectedItems().get(i)));
                                 }
                             })
                             .setNegativeButton(android.R.string.cancel, null)
@@ -84,6 +88,12 @@ public class ItemsFragment extends Fragment {
                                     actionMode.finish();
                                 }
                             })
+//                            .setItems(R.array.colors_array, new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                }
+//                                // The 'which' argument contains the index position of the selected item
+//                            })
+//                            .setView(getActivity().getLayoutInflater().inflate(R.layout.dialog, null))
                             .show();
                     return true;
             }
@@ -93,6 +103,7 @@ public class ItemsFragment extends Fragment {
         @Override
         public void onDestroyActionMode(ActionMode mode) {
             actionMode = null;
+            addButton.setVisibility(View.VISIBLE);
             adapter.clearSelections();
         }
     };
@@ -106,18 +117,26 @@ public class ItemsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         final RecyclerView items = (RecyclerView) view.findViewById(R.id.items);
+        items.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         items.setAdapter(adapter);
-        final GestureDetector gestureDetector = new GestureDetector( getActivity(), new GestureDetector.SimpleOnGestureListener() {
+
+        final GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
             @Override
             public void onLongPress(MotionEvent e) {
-                actionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(actionModeCallback);
+
+                if (actionMode == null) {
+                    actionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(actionModeCallback);
+                }
                 toggleSelection(e, items);
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                toggleSelection(e, items);
+                if (actionMode != null) {
+                    toggleSelection(e, items);
+                }
                 return super.onSingleTapConfirmed(e);
             }
         });
@@ -139,8 +158,8 @@ public class ItemsFragment extends Fragment {
             }
         });
 
-        add = view.findViewById(R.id.add);
-        add.setOnClickListener(new View.OnClickListener() {
+        addButton = view.findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -154,11 +173,25 @@ public class ItemsFragment extends Fragment {
         type = getArguments().getString(ARG_TYPE);
         api = ((LSApp) getActivity().getApplication()).api();
 
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        itemAnimator.setAddDuration(1000);
+        itemAnimator.setRemoveDuration(1000);
+        items.setItemAnimator(itemAnimator);
+
         loadItems();
     }
 
     private void toggleSelection(MotionEvent e, RecyclerView items) {
         adapter.toggleSelection(items.getChildLayoutPosition(items.findChildViewUnder(e.getX(), e.getY())));
+
+        Integer count = adapter.getSelectedItemCount();
+        if (count == 0) {
+            actionMode.finish();
+            return;
+        }
+
+        String title = String.format("%d элемента выбрано", count);
+        actionMode.setTitle(title);
     }
 
     private void loadItems() {
@@ -189,6 +222,8 @@ public class ItemsFragment extends Fragment {
                     adapter.clear();
                     adapter.addAll(data);
                 }
+
+                refresh.setRefreshing(false);
             }
 
             @Override
