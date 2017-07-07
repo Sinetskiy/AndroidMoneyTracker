@@ -15,4 +15,5 @@
     <color name="colorAccent">#1ca498</color>
     <color name="colorItem">#fcc31e</color>
     <color name="colorItemSelected">#985305</color>
+    <color name="colorPriceSelected">#9e4900</color>
 </resources>

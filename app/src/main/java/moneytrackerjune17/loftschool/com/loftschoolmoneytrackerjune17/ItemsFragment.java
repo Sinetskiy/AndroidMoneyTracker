@@ -1,5 +1,6 @@
 package moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,8 +9,17 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -38,8 +48,65 @@ public class ItemsFragment extends Fragment {
 
     private String type;
     private LSApi api;
-    private View add;
+    private View addButton;
     private SwipeRefreshLayout refresh;
+    private ActionMode actionMode;
+
+    private ActionMode.Callback actionModeCallback = new ActionMode.Callback() {
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            addButton.setVisibility(View.INVISIBLE);
+            mode.getMenuInflater().inflate(R.menu.items, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.menu_remove:
+                    new AlertDialog.Builder(getContext())
+                            .setTitle(R.string.app_name)
+                            .setMessage(R.string.confirm_remove)
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int id) {
+                                    for (int i = adapter.getSelectedItems().size() - 1; i >= 0; i--)
+
+                                        removeItem(adapter.remove(adapter.getSelectedItems().get(i)));
+                                }
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    actionMode.finish();
+                                }
+                            })
+//                            .setItems(R.array.colors_array, new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                }
+//                                // The 'which' argument contains the index position of the selected item
+//                            })
+//                            .setView(getActivity().getLayoutInflater().inflate(R.layout.dialog, null))
+                            .show();
+                    return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            actionMode = null;
+            addButton.setVisibility(View.VISIBLE);
+            adapter.clearSelections();
+        }
+    };
 
     @Nullable
     @Override
@@ -52,19 +119,47 @@ public class ItemsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final RecyclerView items = (RecyclerView) view.findViewById(R.id.items);
+        items.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
         items.setAdapter(adapter);
 
-        refresh = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
-        refresh.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
+        final GestureDetector gestureDetector = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public void onLongPress(MotionEvent e) {
 
-                    @Override
-                    public void onRefresh() {
-                        loadItems();
-                    }
-                });
-        add = view.findViewById(R.id.add);
-        add.setOnClickListener(new View.OnClickListener() {
+                if (actionMode == null) {
+                    actionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(actionModeCallback);
+                }
+                toggleSelection(e, items);
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                if (actionMode != null) {
+                    toggleSelection(e, items);
+                }
+                return super.onSingleTapConfirmed(e);
+            }
+        });
+
+        items.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+
+        refresh = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+            @Override
+            public void onRefresh() {
+                loadItems();
+            }
+        });
+
+        addButton = view.findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -78,9 +173,26 @@ public class ItemsFragment extends Fragment {
         type = getArguments().getString(ARG_TYPE);
         api = ((LSApp) getActivity().getApplication()).api();
 
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        itemAnimator.setAddDuration(1000);
+        itemAnimator.setRemoveDuration(1000);
+        items.setItemAnimator(itemAnimator);
+
         loadItems();
     }
 
+    private void toggleSelection(MotionEvent e, RecyclerView items) {
+        adapter.toggleSelection(items.getChildLayoutPosition(items.findChildViewUnder(e.getX(), e.getY())));
+
+        Integer count = adapter.getSelectedItemCount();
+        if (count == 0) {
+            actionMode.finish();
+            return;
+        }
+
+        String title = String.format("%d элемента выбрано", count);
+        actionMode.setTitle(title);
+    }
 
     private void loadItems() {
 
@@ -110,6 +222,8 @@ public class ItemsFragment extends Fragment {
                     adapter.clear();
                     adapter.addAll(data);
                 }
+
+                refresh.setRefreshing(false);
             }
 
             @Override

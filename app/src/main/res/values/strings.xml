@@ -11,6 +11,10 @@
     <string name="error">Произошла ошибка</string>
     <string name="new_item">Новая запись</string>
     <string name="plus">+</string>
+    <string name="confirm_remove">Уверен ?</string>
+    <string name="dialog">Диалог !!!</string>
+    <string name="fire">Согласен</string>
+    <string name="cancel">Отмена</string>
 
     <array name="main_pager_titles">
         <item>@string/expenses</item>

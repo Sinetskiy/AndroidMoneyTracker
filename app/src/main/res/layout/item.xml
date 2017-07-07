@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ItemLinerLayout">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/name"
-        style="@style/TextItem.Name"
-        tools:text="Сковородка с антипригарным покрытием" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/item_container"
+        style="@style/ItemLinerLayout">
 
-    <TextView
-        android:id="@+id/price"
-        style="@style/TextItem.Price"
-        tools:text="35 \u20bd" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/name"
+            style="@style/TextItem.Name"
+            android:background="@drawable/bg_name"
+            tools:text="Сковородка с антипригарным покрытием" />
+
+        <TextView
+            android:id="@+id/price"
+            style="@style/TextItem.Price"
+            android:background="@drawable/bg_price"
+            tools:text="35 \u20bd" />
+    </LinearLayout>
+</FrameLayout>
