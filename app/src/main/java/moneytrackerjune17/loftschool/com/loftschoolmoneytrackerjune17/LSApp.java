@@ -37,7 +37,7 @@ public class LSApp extends Application {
         super.onCreate();
 
         // выводить view авторизации всегда
-        getSharedPreferences(PREFERENCES_SESSION, MODE_PRIVATE).edit().clear().commit();
+        //getSharedPreferences(PREFERENCES_SESSION, MODE_PRIVATE).edit().clear().commit();
 
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
