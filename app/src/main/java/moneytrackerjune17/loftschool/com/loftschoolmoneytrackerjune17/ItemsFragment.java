@@ -190,7 +190,7 @@ public class ItemsFragment extends Fragment {
             return;
         }
 
-        String title = String.format("%d элемента выбрано", count);
+        String title = getString(R.string.selectedItemsTitle, count);
         actionMode.setTitle(title);
     }
 
@@ -234,7 +234,7 @@ public class ItemsFragment extends Fragment {
 
     private void addItem(final Item item) {
 
-        getLoaderManager().initLoader(LOADER_ADD, null, new LoaderManager.LoaderCallbacks<AddResult>() {
+        getLoaderManager().restartLoader(LOADER_ADD, null, new LoaderManager.LoaderCallbacks<AddResult>() {
 
             @Override
             public Loader<AddResult> onCreateLoader(int id, Bundle args) {
@@ -253,19 +253,19 @@ public class ItemsFragment extends Fragment {
 
             @Override
             public void onLoadFinished(Loader<AddResult> loader, AddResult data) {
-                adapter.updateId(item, data.id);
+                adapter.add(item);
             }
 
             @Override
             public void onLoaderReset(Loader<AddResult> loader) {
 
             }
-        }).startLoading();
+        }).forceLoad();
     }
 
     private void removeItem(final Item item) {
 
-        getLoaderManager().initLoader(LOADER_REMOVE, null, new LoaderManager.LoaderCallbacks<Result>() {
+        getLoaderManager().restartLoader(LOADER_REMOVE, null, new LoaderManager.LoaderCallbacks<Result>() {
 
             @Override
             public Loader<Result> onCreateLoader(int id, Bundle args) {
@@ -291,7 +291,7 @@ public class ItemsFragment extends Fragment {
             public void onLoaderReset(Loader<Result> loader) {
 
             }
-        }).startLoading();
+        }).forceLoad();
     }
 
     @Override
