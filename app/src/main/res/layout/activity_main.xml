@@ -22,7 +22,8 @@
             style="@style/Tabs"
             app:tabIndicatorColor="@color/tab_indicator"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/light_blue_grey" />
+            app:tabTextColor="@color/light_blue_grey"
+            app:tabTextAppearance="@style/TabLayoutTextSize" />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager

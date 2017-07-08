@@ -36,6 +36,9 @@ public class LSApp extends Application {
     public void onCreate() {
         super.onCreate();
 
+        // выводить view авторизации всегда
+        getSharedPreferences(PREFERENCES_SESSION, MODE_PRIVATE).edit().clear().commit();
+
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -62,11 +65,15 @@ public class LSApp extends Application {
     }
 
     public void setAuthToken(String authToken) {
-        getSharedPreferences(PREFERENCES_SESSION, MODE_PRIVATE).edit().putString(KEY_AUTH_TOKEN, authToken).apply();
+        getSharedPreferences(PREFERENCES_SESSION, MODE_PRIVATE)
+                .edit()
+                .putString(KEY_AUTH_TOKEN, authToken)
+                .apply();
     }
 
     public String getAuthToken() {
-        return getSharedPreferences(PREFERENCES_SESSION, MODE_PRIVATE).getString(KEY_AUTH_TOKEN, "");
+        return getSharedPreferences(PREFERENCES_SESSION, MODE_PRIVATE)
+                .getString(KEY_AUTH_TOKEN, "");
     }
 
     public boolean isLoggedIn() {
@@ -74,6 +81,7 @@ public class LSApp extends Application {
     }
 
     private class AuthInterceptor implements Interceptor {
+
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request originalRequest = chain.request();

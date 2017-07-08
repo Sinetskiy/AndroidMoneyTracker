@@ -23,8 +23,6 @@ public class MainActivity extends AppCompatActivity {
         tabs = (TabLayout) findViewById(R.id.tabs);
         pages = (ViewPager) findViewById(R.id.pages);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        initUi();
     }
 
     @Override

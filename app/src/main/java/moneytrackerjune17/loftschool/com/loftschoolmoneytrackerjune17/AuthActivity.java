@@ -56,10 +56,13 @@ public class AuthActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {
+
             final GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
 
             if (result.isSuccess() && result.getSignInAccount() != null) {
+
                 final GoogleSignInAccount account = result.getSignInAccount();
+
                 getSupportLoaderManager().restartLoader(0, null, new LoaderManager.LoaderCallbacks<AuthResult>() {
                     @Override
                     public Loader<AuthResult> onCreateLoader(int id, Bundle args) {
