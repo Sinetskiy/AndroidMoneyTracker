@@ -16,4 +16,7 @@
     <color name="colorItem">#fcc31e</color>
     <color name="colorItemSelected">#985305</color>
     <color name="colorPriceSelected">#9e4900</color>
+    <color name="colorExpense">#ff5825</color>
+    <color name="colorPrimaryBright">#3ab7ae</color>
+    <color name="colorComment">#95989a</color>
 </resources>

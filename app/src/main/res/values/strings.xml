@@ -22,4 +22,10 @@
         <item>@string/incomes</item>
         <item>@string/balance</item>
     </array>
+
+    <string name="your_balance">ваш баланс</string>
+    <string name="expense">расход</string>
+    <string name="income">доход</string>
+    <string name="price">%1$d \u20bd</string>
+    <string name="selectedItemsTitle">%d элемента выбрано</string>
 </resources>
