@@ -15,12 +15,15 @@ import retrofit2.http.Query;
 
 public interface LSApi {
 
+    @GET("auth")
+    Call<AuthResult> auth(@Query("social_user_id") String socialUserId);
+
     @Headers("Content-Type: application/json")
     @GET("items")
     Call<List<Item>> items(@Query("type") String type);
 
-//    @GET("balance")
-//    Call<BalanceResult> balance();
+    //    @GET("balance")
+    //    Call<BalanceResult> balance();
 
     @POST("items/add")
     Call<AddResult> add(@Query("name") String name, @Query("price") int pri, @Query("type") String type);

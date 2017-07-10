@@ -298,8 +298,8 @@ public class ItemsFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RC_ADD_ITEM && resultCode == RESULT_OK) {
 
-            addItem((Item) data.getSerializableExtra(AddItemActivity.RESULT_ITEM));
             Item item = (Item) data.getSerializableExtra(AddItemActivity.RESULT_ITEM);
+            addItem(item);
             Toast toast = Toast.makeText(getContext(), item.name + " " + item.price, Toast.LENGTH_LONG);
             toast.show();
         }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "995805939140",
+    "project_id": "money-tracker-8"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:995805939140:android:519ae0b69c068543",
+        "android_client_info": {
+          "package_name": "moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "995805939140-24mo48ii5u0s7innkdobjsuukgom8vgh.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "995805939140-khfpdhuak8gatgp0jefid361tbnt37ub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "moneytrackerjune17.loftschool.com.loftschoolmoneytrackerjune17",
+            "certificate_hash": "2d5c37ced5039bebfe46e106f8804da8a04defca"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDAjqSafLT_uxbTZsvJV8mJv0eJxHCWAE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
